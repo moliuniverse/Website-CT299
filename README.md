@@ -28,14 +28,14 @@
 | Buổi 4 | Chức năng giỏ hàng ||
 | Buổi 5 | Hoàn thiện chi tiết sản phẩ ||
 
----
+------
 ## 💡 Hướng phát triển
 
 - Responsive cho điện thoại
 - Thêm chức năng tìm kiếm
 - Tích hợp thanh toán online
 
----
+------
 
 ## 📜 Giấy phép
 
