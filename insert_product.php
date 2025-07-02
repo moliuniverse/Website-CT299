@@ -23,7 +23,7 @@ $quantity = 10;
 // 3. Xử lý ảnh
 $image_name = '';
 if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
-    $upload_dir = 'uploads/';
+    $upload_dir = 'images/';
     if (!is_dir($upload_dir)) {
         mkdir($upload_dir, 0755, true);
     }
