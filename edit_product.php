@@ -59,7 +59,7 @@ if (!$product) {
     <?php
     $types = ['iphone','mac','ipad','watch','airpods','phukien'];
     foreach ($types as $t) {
-        $sel = ($product['category'] == $t) ? "selected" : "";
+        $sel = (strtolower($product['category']) == $t) ? "selected" : "";
         echo "<option value=\"$t\" $sel>" . ucfirst($t) . "</option>";
     }
     ?>
