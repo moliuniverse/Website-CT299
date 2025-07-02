@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Chi tiết sản phẩm</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 30px;
+      background: #fff;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    }
+    .left {
+      flex: 1 1 45%;
+    }
+    .right {
+      flex: 1 1 50%;
+    }
+    .left img {
+      width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .thumbnails {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .thumbnails img {
+      width: 60px;
+      cursor: pointer;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      transition: transform 0.2s;
+    }
+    .thumbnails img:hover {
+      transform: scale(1.1);
+    }
+    h2 {
+      font-size: 30px;
+      margin-bottom: 10px;
+    }
+    .price {
+      font-size: 22px;
+      margin: 10px 0;
+    }
+    .price del {
+      color: #999;
+      margin-right: 10px;
+    }
+    .option-group {
+      margin: 20px 0;
+    }
+    .option-group .label {
+      font-weight: bold;
+      margin-bottom: 6px;
+      display: block;
+    }
+    .options {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .option-button {
+      padding: 8px 16px;
+      border: 2px solid #ccc;
+      border-radius: 8px;
+      background: #fff;
+      cursor: pointer;
+      font-size: 16px;
+      transition: all 0.2s;
+    }
+    .option-button.active {
+      border-color: #0071e3;
+      background: #e8f0fe;
+      font-weight: bold;
+    }
+    .option-button.disabled {
+      opacity: 0.5;
+      pointer-events: none;
+    }
+    .actions {
+      margin-top: 30px;
+      display: flex;
+      gap: 16px;
+    }
+    .actions button {
+      flex: 1;
+      padding: 14px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .actions button:first-child {
+      background: #0071e3;
+      color: white;
+    }
+    .actions button:first-child:hover {
+      background: #005bb5;
+    }
+    .actions button:last-child {
+      background: #ff9900;
+      color: white;
+    }
+    .actions button:last-child:hover {
+      background: #cc7a00;
+    }
+    .description, .specs {
+      margin-top: 40px;
+    }
+    .description p {
+      line-height: 1.6;
+    }
+    .specs table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+    .specs th, .specs td {
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: left;
+    }
+    .specs th {
+      background: #f7f7f7;
+      width: 40%;
+    }
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container" id="product-detail">
+    <p>Đang tải sản phẩm...</p>
+  </div>
+  <script src="chitiet.js"></script>
+</body>
+</html>

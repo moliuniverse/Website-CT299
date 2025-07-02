@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Thêm sản phẩm</title>
+  <style>
+    body {
+      font-family: Arial;
+      background: #f2f2f2;
+    }
+
+    form {
+      max-width: 500px;
+      margin: 50px auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 12px rgba(0,0,0,0.1);
+    }
+
+    input, select {
+      width: 100%;
+      margin-bottom: 15px;
+      padding: 10px;
+      font-size: 16px;
+    }
+
+    button {
+      padding: 10px 20px;
+      background: #0071e3;
+      color: white;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #005bb5;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <form action="insert_product.php" method="POST" enctype="multipart/form-data">
+    <h2>Thêm sản phẩm mới</h2>
+    
+    <input type="text" name="name" placeholder="Tên sản phẩm" required>
+    <input type="number" name="price" placeholder="Giá gốc" required>
+    <input type="number" name="discount_price" placeholder="Giá khuyến mãi" required>
+    
+    <select name="category" id="category" required>
+      <option value="">-- Chọn danh mục --</option>
+      <option value="iphone">iPhone</option>
+      <option value="mac">Mac</option>
+      <option value="ipad">iPad</option>
+      <option value="watch">Watch</option>
+      <option value="airpods">AirPods</option>
+      <option value="phukien">Phụ kiện</option>
+    </select>
+
+    <input type="text" name="color" placeholder="Màu sắc (vd: đen, trắng)" required>
+
+    <div id="storage-field">
+      <input type="text" name="storage" placeholder="Dung lượng (vd: 128GB, 256GB)">
+    </div>
+
+    <div id="version-field" class="hidden">
+      <input type="text" name="version" placeholder="Phiên bản (vd: LTE, Nike, MagSafe)">
+    </div>
+
+    <label>Chọn ảnh sản phẩm:</label>
+    <input type="file" name="image" accept="image/*" required>
+
+    <button type="submit">➕ Thêm sản phẩm</button>
+  </form>
+
+  <script>
+    const categorySelect = document.getElementById('category');
+    const versionField = document.getElementById('version-field');
+    const storageField = document.getElementById('storage-field');
+
+    categorySelect.addEventListener('change', function () {
+      const value = this.value;
+
+      if (value === 'iphone' || value === 'mac' || value === 'ipad') {
+        versionField.classList.add('hidden');
+        storageField.classList.remove('hidden');
+      } else if (value === 'watch') {
+        versionField.classList.remove('hidden');
+        storageField.classList.add('hidden');
+      } else if (value === 'airpods' || value === 'phukien') {
+        versionField.classList.add('hidden');
+        storageField.classList.add('hidden');
+      } else {
+        versionField.classList.add('hidden');
+        storageField.classList.remove('hidden');
+      }
+    });
+  </script>
+
+</body>
+</html>
