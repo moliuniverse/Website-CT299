@@ -62,60 +62,162 @@ if ($res3) {
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mô tả & Thông số</title>
+  <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    body { font-family: Arial; background: #f4f4f4; padding: 30px; }
-    form { max-width: 700px; margin: auto; background: white; padding: 20px; border-radius: 8px; }
-    textarea, input { width: 100%; padding: 10px; margin: 10px 0; }
-    table { width: 100%; margin-top: 20px; border-collapse: collapse; }
-    th, td { padding: 8px; }
-    button { padding: 10px 20px; background: #0071e3; color: white; border: none; border-radius: 5px; cursor: pointer; }
-    button:hover { background: #005bb5; }
-    img.thumbnail { width: 80px; margin: 5px; border: 1px solid #ccc; border-radius: 4px; }
+    body {
+      background-color: #f9fafb;
+      color: #1f2a44;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+    .form-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    input, textarea {
+      transition: all 0.3s ease;
+    }
+    input:focus, textarea:focus {
+      outline: none;
+      ring: 2px solid #000;
+    }
+    .button {
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+    .button:hover {
+      transform: translateY(-1px);
+    }
+    .thumbnail {
+      transition: transform 0.3s ease;
+    }
+    .thumbnail:hover {
+      transform: scale(1.05);
+    }
   </style>
 </head>
-<body>
-  <form method="POST" enctype="multipart/form-data">
-    <h2>📝 Mô tả & Thông số cho ID: <?= htmlspecialchars($id) ?></h2>
+<body class="min-h-screen bg-gray-50">
+  <div class="form-container py-8">
+    <form method="POST" enctype="multipart/form-data" class="bg-white shadow-lg rounded-lg p-6">
+      <h2 class="text-2xl font-bold text-gray-900 mb-6">📝 Mô tả & Thông số cho ID: <?= htmlspecialchars($id) ?></h2>
 
-    <label>Mô tả sản phẩm:</label>
-    <textarea name="description" rows="5" required><?= htmlspecialchars($desc) ?></textarea>
-
-    <h3>Thông số kỹ thuật:</h3>
-    <table id="spec-table">
-      <thead><tr><th>Thông số</th><th>Giá trị</th></tr></thead>
-      <tbody>
-        <?php foreach ($specs as $s): ?>
-        <tr>
-          <td><input name="label[]" value="<?= htmlspecialchars($s['label']) ?>"></td>
-          <td><input name="value[]" value="<?= htmlspecialchars($s['value']) ?>"></td>
-        </tr>
-        <?php endforeach; ?>
-        <tr><td><input name="label[]"></td><td><input name="value[]"></td></tr>
-      </tbody>
-    </table>
-    <button type="button" onclick="addRow()">➕ Thêm dòng</button>
-
-    <h3>📸 Thêm ảnh phụ:</h3>
-    <input type="file" name="images[]" accept="image/*" multiple>
-
-    <?php if ($images): ?>
-      <div style="margin-top: 10px;">
-        <strong>Ảnh hiện tại:</strong><br>
-        <?php foreach ($images as $img): ?>
-          <img class="thumbnail" src="images/<?= htmlspecialchars($img) ?>">
-        <?php endforeach; ?>
+      <div class="mb-6">
+        <label class="block text-sm font-medium text-gray-700 mb-2">Mô tả sản phẩm:</label>
+        <textarea 
+          name="description" 
+          rows="5" 
+          required
+          class="w-full px-4 py-2 text-gray-900 bg-white border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-gray-900 focus:border-gray-900"
+        ><?= htmlspecialchars($desc) ?></textarea>
       </div>
-    <?php endif; ?>
 
-    <br><br>
-    <button type="submit">💾 Lưu thông tin</button>
-  </form>
+      <div class="mb-6">
+        <h3 class="text-lg font-semibold text-gray-900 mb-3">Thông số kỹ thuật:</h3>
+        <table id="spec-table" class="w-full border-collapse">
+          <thead>
+            <tr class="bg-gray-100">
+              <th class="px-4 py-2 text-left text-sm font-semibold text-gray-900">Thông số</th>
+              <th class="px-4 py-2 text-left text-sm font-semibold text-gray-900">Giá trị</th>
+            </tr>
+          </thead>
+          <tbody>
+            <?php foreach ($specs as $s): ?>
+              <tr class="hover:bg-gray-50">
+                <td class="px-4 py-2">
+                  <input 
+                    name="label[]" 
+                    value="<?= htmlspecialchars($s['label']) ?>"
+                    class="w-full px-3 py-2 text-gray-900 bg-white border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-gray-900 focus:border-gray-900"
+                  >
+                </td>
+                <td class="px-4 py-2">
+                  <input 
+                    name="value[]" 
+                    value="<?= htmlspecialchars($s['value']) ?>"
+                    class="w-full px-3 py-2 text-gray-900 bg-white border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-gray-900 focus:border-gray-900"
+                  >
+                </td>
+              </tr>
+            <?php endforeach; ?>
+            <tr class="hover:bg-gray-50">
+              <td class="px-4 py-2">
+                <input 
+                  name="label[]" 
+                  class="w-full px-3 py-2 text-gray-900 bg-white border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-gray-900 focus:border-gray-900"
+                >
+              </td>
+              <td class="px-4 py-2">
+                <input 
+                  name="value[]" 
+                  class="w-full px-3 py-2 text-gray-900 bg-white border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-gray-900 focus:border-gray-900"
+                >
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <button 
+          type="button" 
+          onclick="addRow()" 
+          class="button mt-4 inline-flex items-center px-4 py-2 bg-gray-900 text-white rounded-lg shadow-sm hover:bg-gray-700"
+        >
+          ➕ Thêm dòng
+        </button>
+      </div>
+
+      <div class="mb-6">
+        <h3 class="text-lg font-semibold text-gray-900 mb-3">📸 Thêm ảnh phụ:</h3>
+        <input 
+          type="file" 
+          name="images[]" 
+          accept="image/*" 
+          multiple
+          class="w-full px-3 py-2 text-gray-600 bg-white border border-gray-300 rounded-lg shadow-sm file:border-0 file:bg-gray-100 file:px-4 file:py-2 file:rounded-lg"
+        >
+      </div>
+
+      <?php if ($images): ?>
+        <div class="mb-6">
+          <strong class="block text-sm font-medium text-gray-700 mb-2">Ảnh hiện tại:</strong>
+          <div class="flex flex-wrap gap-2">
+            <?php foreach ($images as $img): ?>
+              <img 
+                src="images/<?= htmlspecialchars($img) ?>" 
+                class="thumbnail w-20 h-auto rounded border border-gray-300"
+              >
+            <?php endforeach; ?>
+          </div>
+        </div>
+      <?php endif; ?>
+
+      <div class="flex justify-end">
+        <button 
+          type="submit" 
+          class="button inline-flex items-center px-4 py-2 bg-gray-900 text-white rounded-lg shadow-sm hover:bg-gray-700"
+        >
+          💾 Lưu thông tin
+        </button>
+      </div>
+    </form>
+  </div>
 
   <script>
     function addRow() {
       const row = document.createElement('tr');
-      row.innerHTML = '<td><input name="label[]"></td><td><input name="value[]"></td>';
+      row.className = 'hover:bg-gray-50';
+      row.innerHTML = `
+        <td class="px-4 py-2">
+          <input 
+            name="label[]" 
+            class="w-full px-3 py-2 text-gray-900 bg-white border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-gray-900 focus:border-gray-900"
+          >
+        </td>
+        <td class="px-4 py-2">
+          <input 
+            name="value[]" 
+            class="w-full px-3 py-2 text-gray-900 bg-white border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-gray-900 focus:border-gray-900"
+          >
+        </td>
+      `;
       document.querySelector('#spec-table tbody').appendChild(row);
     }
   </script>
