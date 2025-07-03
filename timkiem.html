@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kết quả tìm kiếm - Eden Tech</title>
+    <link rel="stylesheet" href="css/trangchu.css"> <link rel="stylesheet" href="css/timkiem.css">
+</head>
+<body>
+    <header>
+        <div class="logo">Eden Tech</div>
+        <nav>
+            <a href="trangchu.html#iphone">iPhone</a>
+            <a href="trangchu.html#mac">Mac</a>
+            <a href="trangchu.html#ipad">iPad</a>
+            <a href="trangchu.html#watch">Apple Watch</a>
+            <a href="trangchu.html#airpods">AirPods</a>
+            <a href="trangchu.html#phukien">Phụ Kiện</a>
+        </nav>
+        <div class="header-right">
+            <div class="search-bar">
+             <img src="./images/search.png" alt="Tìm kiếm" class="search-toggle">
+                 <input type="text" placeholder="Tìm kiếm sản phẩm..." aria-label="Tìm kiếm sản phẩm" class="search-input">
+            </div>
+             <a href="cart.html" class="icon-button"><img src="./images/shopping-bag.png" alt="Giỏ hàng" class="icon-img"></a>
+             <a href="dangnhap.html" class="icon-button"><img src="./images/user.png" alt="Tài khoản" class="icon-img"></a>
+        </div>
+    </header>
+    <div class="search-page-container">
+        <aside class="filter-sidebar">
+            <h3>Bộ lọc</h3>
+            <div class="filter-group">
+                <h4>Khoảng giá</h4>
+                <div id="price-filters">
+                    <label><input type="radio" name="price" value="all" checked> Tất cả</label>
+                    <label><input type="radio" name="price" value="0-10000000"> Dưới 10 triệu</label>
+                    <label><input type="radio" name="price" value="10000000-20000000"> Từ 10 - 20 triệu</label>
+                    <label><input type="radio" name="price" value="20000000-30000000"> Từ 20 - 30 triệu</label>
+                    <label><input type="radio" name="price" value="30000000-999999999"> Trên 30 triệu</label>
+                </div>
+            </div>
+            <div class="filter-group">
+                <h4>Danh mục</h4>
+                <div id="category-filters"></div>
+            </div>
+            <div class="filter-group">
+                <h4>Màu sắc</h4>
+                <div id="color-filters"></div>
+            </div>
+        </aside>
+
+        <main class="results-content">
+            <h1 id="search-heading">Đang tìm kiếm...</h1>
+
+            <div class="sort-bar">
+                <span id="results-count"></span>
+                <div class="sort-options">
+                    <label for="sort">Sắp xếp theo:</label>
+                    <select id="sort-select">
+                        <option value="default">Mặc định</option>
+                        <option value="price-asc">Giá: Thấp đến Cao</option>
+                        <option value="price-desc">Giá: Cao đến Thấp</option>
+                    </select>
+                </div>
+            </div>
+
+            <div id="results-grid" class="results-grid"></div>
+            
+            <button id="load-more-btn" class="load-more-btn" style="display: none;">Xem thêm sản phẩm</button>
+
+            <div id="similar-products-section" class="similar-products" style="display: none;">
+                <h2>Có thể bạn cũng thích</h2>
+                <div id="similar-grid" class="results-grid"></div>
+            </div>
+        </main>
+    </div>
+    
+    <footer>
+        <div class="footer-container">
+            <div class="footer-column"><h3>Mua sắm & Tìm hiểu</h3><ul><li><a href="trangchu.html#mac">Mac</a></li><li><a href="trangchu.html#ipad">iPad</a></li><li><a href="trangchu.html#iphone">iPhone</a></li></ul></div>
+            <div class="footer-column"><h3>Tài khoản & Dịch vụ</h3><ul><li><a href="#">Quản lý tài khoản</a></li><li><a href="#">Lịch sử mua hàng</a></li><li><a href="#">Trung tâm hỗ trợ</a></li></ul></div>
+            <div class="footer-column"><h3>Về Eden Tech</h3><ul><li><a href="#">Giới thiệu</a></li><li><a href="#">Liên hệ</a></li></ul></div>
+        </div>
+        <div class="footer-bottom"><p>Copyright © 2025 Eden Tech. All rights reserved.</p></div>
+    </footer>
+    <script src="js/timkiem.js"></script>
+    <script src="js/trangchu.js" defer></script>
+</body>
+</html>
