@@ -1,0 +1,137 @@
+/* ---- FILE: chitiet.css ---- */
+
+/* Không cần định nghĩa lại body ở đây vì đã có trong trangchu.css */
+/* Bạn có thể ghi đè nếu muốn có màu nền khác cho trang chi tiết */
+body {
+    background-color: #666; /* Ghi đè màu nền từ trangchu.css */
+    margin-top: 80px; /* Header của bạn có chiều cao khoảng 60px */
+}
+
+.container {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 40px;
+    background-color: #ffffff;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px 50px;
+    border-radius: 18px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+/* Cột bên trái */
+.left {
+    flex: 1 1 40%;
+    max-width: 450px;
+    position: relative;
+}
+
+#main-image {
+    width: 100%;
+    border-radius: 18px;
+    border: 1px solid #e5e5e5;
+    aspect-ratio: 1 / 1;
+    object-fit: contain;
+    transition: opacity 0.4s ease-in-out;
+}
+
+/* Nút điều hướng ảnh chính */
+.main-image-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.3);
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 20px 15px;
+    font-size: 28px;
+    font-weight: bold;
+    z-index: 10;
+    transition: background-color 0.2s, opacity 0.3s;
+    opacity: 0;
+    pointer-events: none;
+}
+.left:hover .main-image-nav { opacity: 1; pointer-events: auto; }
+.main-image-nav:hover { background-color: rgba(0, 0, 0, 0.6); }
+.main-image-nav.prev { left: 0; border-radius: 0 8px 8px 0; }
+.main-image-nav.next { right: 0; border-radius: 8px 0 0 8px; }
+
+/* Ảnh phụ (thumbnails) */
+.thumbnails-container { position: relative; margin-top: 15px; }
+.thumbnails { display: flex; gap: 12px; overflow-x: auto; scroll-behavior: smooth; padding: 5px; }
+.thumbnails::-webkit-scrollbar { display: none; }
+.thumbnails { -ms-overflow-style: none; scrollbar-width: none; }
+.thumbnails img { width: 60px; height: 60px; object-fit: contain; cursor: pointer; border-radius: 10px; border: 2px solid #e5e5e5; transition: all 0.3s ease; flex-shrink: 0; }
+.thumbnails img:hover { border-color: #a0a0a0; }
+.thumbnails img.active-thumb { border-color: #0071e3; box-shadow: 0 0 0 2px #0071e3; }
+.thumbnail-scroll-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255, 255, 255, 0.9); border: 1px solid #ddd; width: 28px; height: 28px; cursor: pointer; font-size: 18px; z-index: 10; border-radius: 50%; opacity: 0; transition: opacity 0.2s; display: flex; align-items: center; justify-content: center; }
+.thumbnails-container:hover .thumbnail-scroll-btn { opacity: 1; }
+.prev-thumb { left: -14px; }
+.next-thumb { right: -14px; }
+
+/* Cột bên phải */
+.right { flex: 1 1 50%; /* Tăng giá trị để lấp đầy khoảng trống */ }
+.right h2 { font-size: 32px; margin-bottom: 15px; font-weight: 600; }
+.price { font-size: 24px; margin: 20px 0; font-weight: 600; }
+.price del { color: #86868b; margin-right: 15px; font-weight: 400; }
+.option-group { margin: 25px 0; }
+.option-group .label { font-weight: 600; font-size: 18px; margin-bottom: 12px; display: block; }
+.options { display: flex; gap: 12px; flex-wrap: wrap; }
+.option-button { padding: 10px 20px; border: 1px solid #d2d2d7; border-radius: 12px; background: #fff; cursor: pointer; font-size: 16px; transition: all 0.2s; font-weight: 500; }
+.option-button:hover { border-color: #86868b; }
+.option-button.active { border-color: #0071e3; box-shadow: 0 0 0 2px #0071e3; font-weight: 600; }
+.option-button.disabled { opacity: 0.4; cursor: not-allowed; background-color: #f5f5f7; }
+.actions { margin-top: 35px; display: flex; gap: 16px; flex-direction: column; }
+.actions button { width: 100%; padding: 18px; font-size: 17px; font-weight: 600; border: none; border-radius: 12px; cursor: pointer; transition: background 0.2s, transform 0.1s; }
+.actions button:active { transform: scale(0.98); }
+.actions button:first-child { background: #0071e3; color: white; }
+.actions button:first-child:hover { background: #0077ed; }
+.actions button:last-child { background: #f5f5f7; color: #0071e3; }
+.actions button:last-child:hover { background: #e5e5e5; }
+
+/* Phần mô tả và thông số */
+.description, .specs { flex-basis: 100%; margin-top: 20px; border-top: 1px solid #d2d2d7; padding-top: 30px; }
+.description h3, .specs h3 { font-size: 22px; margin-bottom: 15px; }
+.description p { line-height: 1.6; color: #333; }
+.specs table { width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 15px; }
+.specs th, .specs td { border: none; border-bottom: 1px solid #e5e5e5; padding: 12px 0; text-align: left; }
+.specs tr:last-child th, .specs tr:last-child td { border-bottom: none; }
+.specs th { font-weight: 600; width: 35%; }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .container { flex-direction: column; padding: 20px; margin: 20px auto; }
+  .left, .right { flex-basis: 100%; max-width: none; }
+  .right h2 { font-size: 28px; }
+}
+
+/* ===================
+   REVIEWS SECTION STYLES
+=================== */
+.reviews-section {
+    flex-basis: 100%;
+    margin-top: 40px;
+    border-top: 1px solid #d2d2d7;
+    padding-top: 40px;
+}
+.reviews-section h3 { font-size: 22px; margin-bottom: 30px; }
+.review-form-container { background-color: #f5f5f7; padding: 25px; border-radius: 12px; margin-bottom: 40px; }
+.review-form-container h4 { margin-top: 0; margin-bottom: 15px; font-size: 18px; }
+#review-form textarea { width: 100%; height: 100px; padding: 12px; border-radius: 8px; border: 1px solid #d2d2d7; font-size: 16px; margin-bottom: 15px; resize: vertical; }
+#review-form button { background: #0071e3; color: white; padding: 12px 25px; border: none; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; transition: background 0.2s; }
+#review-form button:hover { background: #0077ed; }
+.star-rating { display: flex; flex-direction: row-reverse; justify-content: flex-end; margin-bottom: 15px; }
+.star-rating input[type="radio"] { display: none; }
+.star-rating label { font-size: 30px; color: #ccc; cursor: pointer; transition: color 0.2s; }
+.star-rating input[type="radio"]:checked ~ label, .star-rating label:hover, .star-rating label:hover ~ label { color: #ffc700; }
+#reviews-list { display: flex; flex-direction: column; gap: 25px; }
+.review-item { padding-bottom: 25px; border-bottom: 1px solid #e5e5e5; }
+.review-item:last-child { border-bottom: none; }
+.review-author { display: flex; align-items: center; gap: 15px; margin-bottom: 10px; }
+.review-author img { width: 50px; height: 50px; border-radius: 50%; object-fit: cover; }
+.review-author strong { font-size: 16px; }
+.review-comment { line-height: 1.6; margin: 10px 0; }
+.review-date { font-size: 12px; color: #86868b; }
+.review-stars-display .star { font-size: 16px; color: #ccc; }
+.review-stars-display .star.filled { color: #ffc700; }
