@@ -1,33 +1,24 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Lấy ID sản phẩm từ URL
     const id = new URLSearchParams(window.location.search).get('id');
     const container = document.getElementById('product-detail');
-    let autoSlideInterval; // Biến để lưu trữ bộ đếm thời gian tự động trượt ảnh
+    let autoSlideInterval;
+    let currentProduct = {}; // Biến để lưu thông tin sản phẩm hiện tại
 
-    // Nếu không có ID trong URL, dừng lại và báo lỗi
     if (!id) {
-        container.innerHTML = '<p style="text-align: center; font-size: 18px;">Không tìm thấy ID sản phẩm. Vui lòng kiểm tra lại đường dẫn.</p>';
+        container.innerHTML = '<p style="text-align: center; font-size: 18px;">Không tìm thấy ID sản phẩm.</p>';
         return;
     }
 
-    // Hàm tiện ích để cuộn danh sách ảnh phụ
     window.scrollThumbnails = function(direction) {
       const thumbsContainer = document.querySelector('.thumbnails');
       if (!thumbsContainer) return;
       const scrollAmount = thumbsContainer.offsetWidth * 0.7;
-      if (direction === 'left') {
-        thumbsContainer.scrollLeft -= scrollAmount;
-      } else {
-        thumbsContainer.scrollLeft += scrollAmount;
-      }
+      if (direction === 'left') thumbsContainer.scrollLeft -= scrollAmount;
+      else thumbsContainer.scrollLeft += scrollAmount;
     }
 
-    // Bắt đầu quá trình lấy dữ liệu sản phẩm
     fetch(`php/get_variants.php?id=${id}`)
-      .then(res => {
-          if (!res.ok) throw new Error('Lỗi mạng hoặc không tìm thấy file get_variants.php');
-          return res.json();
-      })
+      .then(res => res.json())
       .then(variants => {
         if (!variants.length) {
           container.innerHTML = '<p>Không tìm thấy sản phẩm với ID này.</p>';
@@ -35,15 +26,16 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         let selected = variants.find(v => v.id == id) || variants[0];
+        currentProduct = selected; // Lưu sản phẩm ban đầu
         const name = selected.name;
         const filteredVariants = variants.filter(v => v.name === name);
         const allColors = [...new Set(filteredVariants.map(v => v.color).filter(Boolean))];
         const allStorages = [...new Set(filteredVariants.map(v => v.storage).filter(Boolean))];
         const hasOptions = allColors.length > 1 || allStorages.length > 1;
 
-        // Hàm chính để render lại toàn bộ giao diện
         async function render() {
           clearInterval(autoSlideInterval);
+          currentProduct = selected; // Cập nhật sản phẩm mỗi khi render lại
 
           const [details, images] = await Promise.all([
               fetch(`php/get_details.php?id=${selected.id}`).then(res => res.json()),
@@ -81,7 +73,6 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
           `;
 
-          // --- LOGIC CHO THƯ VIỆN ẢNH (GALLERY) ---
           const mainImage = document.getElementById('main-image');
           let currentIndex = images.findIndex(img => img === currentImage);
           if (currentIndex === -1) currentIndex = 0;
@@ -107,11 +98,9 @@ document.addEventListener('DOMContentLoaded', () => {
           updateGallery(currentIndex);
           startAutoSlide();
 
-          // --- LOGIC CHỌN PHIÊN BẢN ---
           if (allStorages.length > 1) document.querySelectorAll('#storage-options .option-button').forEach(btn => btn.onclick = () => { const s = btn.dataset.storage; const m = filteredVariants.find(v => v.color === selected.color && v.storage === s) || filteredVariants.find(v => v.storage === s); if (m) { selected = m; render(); } });
           if (allColors.length > 1) document.querySelectorAll('#color-options .option-button:not(.disabled)').forEach(btn => btn.onclick = () => { const c = btn.dataset.color; const m = filteredVariants.find(v => v.color === c && v.storage === selected.storage); if (m) { selected = m; render(); } });
           
-          // --- GẮN SỰ KIỆN VÀ TẢI ĐÁNH GIÁ ---
           document.getElementById('review-form').addEventListener('submit', handleReviewSubmit);
           fetchAndRenderReviews(selected.id);
         }
@@ -119,13 +108,40 @@ document.addEventListener('DOMContentLoaded', () => {
         render();
       })
       .catch(err => {
-        console.error("Lỗi nghiêm trọng khi tải dữ liệu ban đầu:", err);
-        container.innerHTML = '<p>Đã có lỗi xảy ra khi tải dữ liệu sản phẩm. Vui lòng kiểm tra lại ID sản phẩm và kết nối đến server.</p>';
+        console.error("Lỗi khi tải dữ liệu:", err);
+        container.innerHTML = '<p>Đã có lỗi xảy ra khi tải dữ liệu sản phẩm.</p>';
       });
 
-    // --- CÁC HÀM TOÀN CỤC ---
-    window.addToCart = () => { /* Logic thêm vào giỏ hàng */ };
-    window.buyNow = () => { /* Logic mua ngay */ };
+    // ===== HÀM THÊM VÀO GIỎ HÀNG (ĐÃ VIẾT LẠI) =====
+    window.addToCart = () => {
+        // Lấy giỏ hàng từ localStorage, nếu chưa có thì tạo mảng rỗng
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+        // Kiểm tra xem sản phẩm đã có trong giỏ hàng chưa
+        const existingProductIndex = cart.findIndex(item => item.id === currentProduct.id);
+
+        if (existingProductIndex > -1) {
+            // Nếu đã có, chỉ tăng số lượng
+            cart[existingProductIndex].quantity += 1;
+        } else {
+            // Nếu chưa có, thêm sản phẩm mới vào giỏ hàng với số lượng là 1
+            cart.push({ ...currentProduct, quantity: 1 });
+        }
+
+        // Lưu lại giỏ hàng vào localStorage
+        localStorage.setItem('cart', JSON.stringify(cart));
+
+        // Thông báo cho người dùng
+        alert(`Đã thêm "${currentProduct.name}" vào giỏ hàng!`);
+    };
+
+    // ===== HÀM MUA NGAY (ĐÃ VIẾT LẠI) =====
+    window.buyNow = () => {
+        // Thêm sản phẩm vào giỏ hàng
+        addToCart();
+        // Chuyển thẳng đến trang thanh toán
+        window.location.href = 'thanhtoan.html';
+    };
 
     async function fetchAndRenderReviews(productId) {
       const reviewsList = document.getElementById('reviews-list');
