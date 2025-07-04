@@ -27,14 +27,43 @@ header {
 nav a {
     color: #fff;
     margin: 0 15px;
+    font-size: 20px;
     text-decoration: none;
     transition: color 0.3s;
+    position: relative;
+    left: 18px;
     
 }
 
+/* Thẻ a gốc cần có position: relative */
+nav a {
+    color: #fff;
+    margin: 0 15px;
+    text-decoration: none;
+    position: relative; /* Rất quan trọng */
+    padding: 5px 0;
+}
+
+/* --- Hiệu ứng Tỏa Sáng Nâng Cấp --- */
+
+/* Đảm bảo thẻ a gốc có transition để hiệu ứng mượt mà */
+nav a {
+    color: #fff;
+    margin: 0 15px;
+    text-decoration: none;
+    padding: 5px 0;
+    transition: all 0.3s ease; /* Transition cho tất cả thuộc tính */
+}
+
+/* Hiệu ứng mới khi hover/focus */
 nav a:hover, nav a:focus {
-    color: #ccc;
-    outline: 2px solid #fff;
+    color: #fff;
+    outline: none;
+    /* Xếp chồng nhiều lớp shadow để tạo hiệu ứng sáng mạnh hơn */
+    text-shadow: 
+        0 0 5px rgba(255, 255, 255, 1),   /* Lớp sáng trong cùng, rõ nhất */
+        0 0 15px rgba(255, 255, 255, 0.8), /* Lớp sáng ở giữa, mờ hơn */
+        0 0 25px rgba(255, 255, 255, 0.6);  /* Lớp sáng ngoài cùng, mờ nhất */
 }
 
 .header-right {
@@ -82,7 +111,7 @@ nav a:hover, nav a:focus {
   align-items: center;
   gap: 15px;
   position:relative;
-  left:-20px;
+  left:-30px;
 }
 
 .icon-button {
@@ -99,11 +128,86 @@ nav a:hover, nav a:focus {
   object-fit: contain;
 }
 
+#profile-avatar{
+    position: relative;
+    top: 3px;
+}
+
 .giohang {
      width: 20px;
     height: 20px;
     border-radius: 50%;
 
+}
+/* ===================
+   PROFILE DROPDOWN STYLES
+=================== */
+
+.profile-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.profile-toggle {
+    cursor: pointer;
+}
+
+#profile-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%; /* Làm cho ảnh đại diện tròn */
+    object-fit: cover;
+    border: 2px solid #fff;
+}
+
+.dropdown-menu {
+    display: none; /* Mặc định ẩn đi */
+    position: absolute;
+    top: 50px; /* Vị trí so với header */
+    right: 0;
+    background-color: white;
+    min-width: 220px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    border-radius: 12px;
+    padding: 10px 0;
+    border: 1px solid #f0f0f0;
+}
+
+/* Hiển thị dropdown khi có class 'show' */
+.dropdown-menu.show {
+    display: block;
+}
+
+.dropdown-menu a {
+    color: black;
+    padding: 12px 20px;
+    text-decoration: none;
+    display: block;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.dropdown-menu a:hover {
+    background-color: #f5f5f7;
+}
+
+/* Phần thông tin người dùng trong dropdown */
+.dropdown-user-info {
+    padding: 10px 20px;
+    border-bottom: 1px solid #e5e5e5;
+    margin-bottom: 10px;
+}
+.dropdown-user-info strong {
+    font-size: 16px;
+    color: #1d1d1f;
+}
+
+/* Đường kẻ phân cách */
+.dropdown-divider {
+    height: 1px;
+    margin: 8px 0;
+    background-color: #e5e5e5;
 }
 
 .hero {
@@ -167,7 +271,7 @@ nav a:hover, nav a:focus {
 .products h2 {
     color: #fff;
     margin-bottom: 20px;
-    font-size: 1.5rem;
+    font-size: 2rem;
 }
 
 .carousel {

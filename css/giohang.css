@@ -1,0 +1,112 @@
+.cart-container {
+    max-width: 900px;
+    margin: 100px auto 40px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 18px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.cart-container h1 {
+    font-size: 28px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.cart-item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 20px 0;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.cart-item:last-child {
+    border-bottom: none;
+}
+
+.cart-item img {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    border-radius: 8px;
+    background-color: #f5f5f7;
+}
+
+.item-details {
+    flex-grow: 1;
+}
+
+.item-details p {
+    margin: 0 0 10px 0;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.item-details .item-price {
+    color: #555;
+    font-size: 15px;
+}
+
+.item-quantity {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.item-quantity input {
+    width: 50px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 16px;
+}
+
+.remove-item {
+    background: none;
+    border: none;
+    color: #d93025;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.cart-summary {
+    margin-top: 30px;
+    text-align: right;
+}
+
+.summary-text {
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+.checkout-button {
+    display: inline-block;
+    padding: 14px 30px;
+    background-color: #0071e3;
+    color: white;
+    text-decoration: none;
+    border-radius: 12px;
+    font-weight: 600;
+    transition: background-color 0.2s;
+}
+
+.checkout-button.disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+#empty-cart-message {
+    text-align: center;
+    padding: 50px;
+    font-size: 18px;
+    color: #666;
+}
+.item-variant-details {
+    font-size: 13px;
+    color: #333;
+    font-weight: normal !important; /* Ghi đè font-weight nếu cần */
+    margin-top: -5px; /* Giảm khoảng cách với tên sản phẩm */
+}

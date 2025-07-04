@@ -1,47 +1,115 @@
+/* Thiết lập font và nền chung */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f5f5f7;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    margin: 0;
+    color: #333;
+    overflow: hidden; /* Ngăn thanh cuộn xuất hiện khi có hiệu ứng */
+}
+
+.auth-wrapper {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+}
+
+/* Áp dụng đảo ngược cho trang đăng ký */
+.register-page .auth-wrapper {
+    flex-direction: row-reverse; 
+}
+
+/* --- CỘT THƯƠNG HIỆU & CỘT FORM --- */
+.auth-branding, .auth-form-container {
+    flex: 0 0 50%; /* <<< SỬA Ở ĐÂY: Đảm bảo mỗi cột chiếm đúng 50% */
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
-    margin: 0;
-}
-
-.auth-container {
-    width: 100%;
-    max-width: 420px;
-    padding: 20px;
-}
-
-.auth-box {
-    background-color: #ffffff;
     padding: 40px;
-    border-radius: 18px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    box-sizing: border-box;
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out; /* <<< THÊM Ở ĐÂY: Hiệu ứng chuyển động */
+}
+
+/* Cột Thương hiệu */
+.auth-branding {
+    background-image: url('../images/auth-background.jpg!w700wp');
+    background-size: cover;
+    background-position: center;
+    color: white;
     text-align: center;
 }
+.branding-overlay {
+    background-color: rgba(0, 0, 0, 0.4);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.branding-overlay h1 { font-size: 48px; font-weight: 600; margin: 0; }
+.branding-overlay p { font-size: 18px; margin-top: 10px; opacity: 0.9; }
+
+
+/* Cột Form */
+.auth-form-container {
+    background-color: #f5f5f7;
+}
+.auth-box {
+    width: 100%;
+    max-width: 400px;
+    background-color: #ffffff;
+    padding: 50px;
+    border-radius: 18px;
+}
+
+/* --- HIỆU ỨNG CHUYỂN TRANG --- */
+/* Trạng thái ban đầu của các cột: mờ đi và lệch một chút */
+.auth-branding {
+    opacity: 0;
+    transform: translateX(-30px);
+}
+.auth-form-container {
+    opacity: 0;
+    transform: translateX(30px);
+}
+/* Trạng thái sau khi trang tải xong: hiện ra và về đúng vị trí */
+body.loaded .auth-branding,
+body.loaded .auth-form-container {
+    opacity: 1;
+    transform: translateX(0);
+}
+/* Đảo ngược hiệu ứng cho trang đăng ký */
+.register-page .auth-branding {
+    transform: translateX(30px);
+}
+.register-page .auth-form-container {
+    transform: translateX(-30px);
+}
+body.register-page.loaded .auth-branding,
+body.register-page.loaded .auth-form-container {
+    transform: translateX(0);
+}
+
 
 .home-logo {
-    font-size: 24px;
+    font-size: 28px;
     font-weight: bold;
     color: #1d1d1f;
     text-decoration: none;
     margin-bottom: 10px;
     display: block;
+    text-align: center;
 }
-
 .auth-box h2 {
-    font-size: 28px;
+    font-size: 32px;
     margin-bottom: 30px;
     color: #1d1d1f;
+    text-align: center;
+    font-weight: 600;
 }
-
 .input-group {
     margin-bottom: 20px;
     text-align: left;
 }
-
 .input-group label {
     display: block;
     margin-bottom: 8px;
@@ -49,23 +117,20 @@ body {
     color: #555;
     font-weight: 500;
 }
-
 .input-group input {
     width: 100%;
-    padding: 12px 15px;
+    padding: 14px 16px;
     font-size: 16px;
     border: 1px solid #d2d2d7;
     border-radius: 12px;
     box-sizing: border-box;
     transition: border-color 0.2s, box-shadow 0.2s;
 }
-
 .input-group input:focus {
     outline: none;
     border-color: #0071e3;
-    box-shadow: 0 0 0 2px rgba(0, 113, 227, 0.3);
+    box-shadow: 0 0 0 3px rgba(0, 113, 227, 0.2);
 }
-
 .auth-btn {
     width: 100%;
     padding: 15px;
@@ -79,27 +144,30 @@ body {
     transition: background-color 0.2s, transform 0.1s;
     margin-top: 10px;
 }
-
-.auth-btn:hover {
-    background: #0077ed;
-}
-
-.auth-btn:active {
-    transform: scale(0.98);
-}
-
+.auth-btn:hover { background: #0077ed; }
+.auth-btn:active { transform: scale(0.98); }
 .switch-form {
     margin-top: 25px;
-    font-size: 14px;
+    font-size: 15px;
     color: #555;
+    text-align: center;
+}
+.switch-form a { color: #0071e3; text-decoration: none; font-weight: 500; }
+.switch-form a:hover { text-decoration: underline; }
+
+
+/* Responsive cho thiết bị di động */
+@media (max-width: 768px) {
+    .auth-branding {
+        display: none; /* Ẩn cột ảnh trên di động */
+    }
+    .auth-form-container {
+        flex-basis: 100%; /* Trên di động, form chiếm toàn bộ */
+    }
 }
 
-.switch-form a {
-    color: #0071e3;
-    text-decoration: none;
-    font-weight: 500;
-}
 
-.switch-form a:hover {
-    text-decoration: underline;
-}
+
+
+
+
