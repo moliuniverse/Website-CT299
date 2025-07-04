@@ -4,29 +4,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Đăng nhập - Eden Tech</title>
-    <link rel="stylesheet" href="./css/dangky_dangnhap.css">
+    <link rel="stylesheet" href="css/dangky_dangnhap.css">
 </head>
-<body>
-    <div class="auth-container">
-        <div class="auth-box">
-            <a href="trangchu.html" class="home-logo">Eden Tech</a>
-            <h2>Đăng nhập</h2>
-            <form id="login-form">
-                <div class="input-group">
-                    <label for="email_or_phone">Email hoặc Số điện thoại</label>
-                    <input type="text" id="email_or_phone" name="email_or_phone" required>
-                </div>
-                <div class="input-group">
-                    <label for="password">Mật khẩu</label>
-                    <input type="password" id="password" name="password" required>
-                </div>
-                <button type="submit" class="auth-btn">Đăng nhập</button>
-            </form>
-            <p class="switch-form">
-                Chưa có tài khoản? <a href="dangky.html">Đăng ký ngay</a>
-            </p>
+<body class="login-page">
+    <div class="auth-wrapper">
+        <div class="auth-branding">
+            <div class="branding-overlay">
+                <h1>Eden Tech</h1>
+                <p>Nền tảng cho những trải nghiệm tuyệt vời.</p>
+            </div>
+        </div>
+        <div class="auth-form-container">
+            <div class="auth-box">
+                <a href="trangchu.html" class="home-logo">Eden Tech</a>
+                <h2>Chào mừng trở lại</h2>
+                <form id="login-form">
+                    <div class="input-group">
+                        <label for="email_or_phone">Email hoặc Số điện thoại</label>
+                        <input type="text" id="email_or_phone" name="email_or_phone" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="password">Mật khẩu</label>
+                        <input type="password" id="password" name="password" required>
+                    </div>
+                    <button type="submit" class="auth-btn">Đăng nhập</button>
+                </form>
+                <p class="switch-form">
+                    Chưa có tài khoản? <a href="dangky.html">Đăng ký ngay</a>
+                </p>
+            </div>
         </div>
     </div>
-    <script src="./js/auth.js"></script>
+    <script src="js/auth.js"></script>
+    <script>
+        window.addEventListener('load', () => {
+            document.body.classList.add('loaded');
+        });
+    </script>
 </body>
 </html>

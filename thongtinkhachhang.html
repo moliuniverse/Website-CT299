@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thông tin tài khoản - Eden Tech</title>
+    <link rel="stylesheet" href="css/trangchu.css"> <link rel="stylesheet" href="css/thongtinkhachhang.css">
+    <style>
+        body{
+            background-color: #666;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        </header>
+
+    <div class="account-container">
+        <aside class="account-sidebar">
+            <div class="user-profile-preview">
+                <img id="avatar-img-preview" src="images/avatars/default.png" alt="Avatar">
+                <strong id="user-name-display">Loading...</strong>
+                <span id="membership-tier-badge" class="tier-default">Thân Thiết</span>
+            </div>
+            <nav class="account-nav">
+                <a href="#info" class="nav-link active">Thông tin cá nhân</a>
+                <a href="#avatar" class="nav-link">Đổi ảnh đại diện</a>
+                <a href="#password" class="nav-link">Đổi mật khẩu</a>
+                <a href="#history" class="nav-link">Lịch sử đơn hàng</a>
+                <a href="#delete" class="nav-link">Xóa tài khoản</a>
+                <a href="php/logout.php" class="logout-link">Đăng xuất</a>
+            </nav>
+        </aside>
+
+        <main class="account-content">
+            <div id="info" class="content-section active">
+                <h2>Thông tin cá nhân</h2>
+                <form id="info-form">
+                    <div class="input-group"><label for="username">Tên hiển thị</label><input type="text" id="username" name="username" required></div>
+                    <div class="input-group"><label for="email">Email</label><input type="email" id="email" name="email" required></div>
+                    <div class="input-group"><label for="phone">Số điện thoại</label><input type="tel" id="phone" name="phone" required></div>
+                    <button type="submit" class="form-btn">Lưu thay đổi</button>
+                </form>
+            </div>
+
+            <div id="avatar" class="content-section">
+                <h2>Đổi ảnh đại diện</h2>
+                <form id="avatar-form" enctype="multipart/form-data">
+                    <div class="input-group"><label for="avatar-file">Chọn ảnh mới (dưới 2MB)</label><input type="file" id="avatar-file" name="avatar" accept="image/png, image/jpeg" required></div>
+                    <button type="submit" class="form-btn">Cập nhật ảnh</button>
+                </form>
+            </div>
+
+            <div id="password" class="content-section">
+                <h2>Đổi mật khẩu</h2>
+                <form id="password-form">
+                    <div class="input-group"><label for="current_password">Mật khẩu hiện tại</label><input type="password" id="current_password" name="current_password" required></div>
+                    <div class="input-group"><label for="new_password">Mật khẩu mới</label><input type="password" id="new_password" name="new_password" required></div>
+                    <div class="input-group"><label for="confirm_password">Xác nhận mật khẩu mới</label><input type="password" id="confirm_password" name="confirm_password" required></div>
+                    <button type="submit" class="form-btn">Đổi mật khẩu</button>
+                </form>
+            </div>
+            
+            <div id="history" class="content-section">
+                <h2>Lịch sử đơn hàng</h2>
+                <p>Chức năng này sẽ được phát triển trong tương lai.</p>
+                </div>
+
+            <div id="delete" class="content-section delete-section">
+                <h2>Xóa tài khoản</h2>
+                <p><strong>Cảnh báo:</strong> Hành động này không thể hoàn tác. Toàn bộ dữ liệu của bạn sẽ bị xóa vĩnh viễn.</p>
+                <form id="delete-form">
+                    <div class="input-group"><label for="delete_password">Vui lòng nhập mật khẩu để xác nhận</label><input type="password" id="delete_password" name="password" required></div>
+                    <button type="submit" class="form-btn delete-btn">Tôi chắc chắn & Xóa tài khoản</button>
+                </form>
+            </div>
+        </main>
+    </div>
+    
+    <footer>
+        </footer>
+
+    <script src="js/thongtinkhachhang.js"></script>
+</body>
+</html>
